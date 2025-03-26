@@ -19,14 +19,14 @@ Collaborate to build a consumable RESTful API.
 Paula Waite
 
 ## Activities/Responsibilities:
-1. Put together a team resume
-2. Establish team charter and ground rules
-3. Write a problem statement, project objectives, and project plan
-4. Document progress, obstacles, findings, and learning points on a weekly basis
-5. Push source code, HTML, JavaDoc and all supporting materials to GitHub 
-6. Publish user documentation for the targeted end users
-7. Deploy the service to a publicly accessible location 
-8. Present the finished product to the class
+-[X] Put together a team resume 
+-[X] Establish team charter and ground rules
+-[ ] Write a problem statement, project objectives, and project plan
+-[ ] Document progress, obstacles, findings, and learning points on a weekly basis
+-[ ] Push source code, HTML, JavaDoc and all supporting materials to GitHub 
+-[ ] Publish user documentation for the targeted end users
+-[ ] Deploy the service to a publicly accessible location 
+-[ ] Present the finished product to the class
 
 ## Decision Making Guidelines:
 + Everyone has equal say
