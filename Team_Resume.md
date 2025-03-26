@@ -11,7 +11,7 @@
 **1. Justin Gritton-Bell**
 
 * **Hometown & Education:**
-    * Born in Madison, WI
+    * From Madison, WI
     * Memorial High School
     * Madison College
 * **Skills & Talents:**
@@ -38,7 +38,8 @@
 **2. Porter Taylor**
 
 * **Hometown & Education:**
-    * Columbus High School, WI
+    * From Columbus WI
+    * Columbus High School
     * Madison College
 * **Skills & Talents:**
     * Quick Learning
@@ -60,7 +61,7 @@
 **3. Alison Fait**
 
 * **Hometown & Education:**
-    * Marshfield, WI
+    * From Marshfield, WI
     * Marshfield High School
     * Mid-State Technical College
     * Lakeland College
@@ -82,7 +83,7 @@
 **4. Jared Doderer**
 
 * **Hometown & Education:**
-    * Rogue River, Oregon
+    * From Rogue River, Oregon
     * Madison Area Technical College
 * **Skills & Talents:**
     * Adaptability
