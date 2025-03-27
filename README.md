@@ -29,4 +29,4 @@ manipulation, and API design.
 - [Time Log](team/timelog.md)
 - [Meeting Notes](team/team-meetings.md)
 ### Design
-- [Project Plan](design/placeholder.md)
+- [Project Plan](team/project-plan.md)
