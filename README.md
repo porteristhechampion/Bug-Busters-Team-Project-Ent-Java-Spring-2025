@@ -11,12 +11,16 @@ manipulation, and API design.
 ### Project Technologies/Techniques
 - Dependency Management
   - Maven
-- Framework
-  - Springboot???
+- Backend
+  - Springboot
+  - Java
 - Logging
   - Log4J2
-- Unit Testing
+- Testing
   - JUnit
+  - SoapUI
+- Deployment
+  - AWS
 - IDE
   - IntelliJ IDEA
 ### Team
