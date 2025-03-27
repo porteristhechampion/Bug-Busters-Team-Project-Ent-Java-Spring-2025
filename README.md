@@ -5,8 +5,8 @@ To be decided - Possibly a meme generator?
 ### Project Technologies/Techniques 
 - Placeholder
 ### Team
-- [Team Resume](team/placeholder.md)
-- [Team Charter](team/placeholder.md)
+- [Team Resume](team/team-resume.md)
+- [Team Charter](team/team-charter.md)
 - [Time Log](team/timelog.md)
 - [Meeting Notes](team/team-meetings.md)
 ### Design
