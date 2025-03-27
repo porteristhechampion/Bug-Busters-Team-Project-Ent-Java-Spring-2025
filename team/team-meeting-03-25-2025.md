@@ -34,11 +34,11 @@
 ### TODO:
 - [x] Meet with team
 - [x] Pick team name
-- [ ] Create Team Resume
-- [ ] Create Team charter/ground rules
+- [x] Create Team Resume
+- [x] Create Team charter/ground rules
 - [x] Create Team Repository on Github
 - [ ] Choose API Documentation Framework
 - [ ] Push project shell to Repo
-- [ ] Send Resume Info to Jared
+- [x] Send Resume Info to Jared
 - [ ] Create Possible Problem Statement for meme generator - Justin
 - [ ] Give feedback on problem Statement
