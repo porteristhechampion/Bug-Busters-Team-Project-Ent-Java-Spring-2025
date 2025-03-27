@@ -55,7 +55,7 @@
     * Golf
     * Music Exploration
     * Concert Attendance
-* **Additional Information:**
+* **Words of Wisdom:**
     * "Be curious!"
 
 **3. Alison Fait**
