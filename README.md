@@ -1,7 +1,6 @@
 # Bug-Busters-Team-Project-Ent-Java-Spring-2025
 
 ### Problem Statement
-To be decided - Possibly a meme generator?
 In today's fast-paced digital world, humor offers a brief but essential escape. Memes—particularly cat memes—are one of
 the most widely consumed forms of internet entertainment. However, there is currently no simple, programmatic way to
 request a fresh, randomized cat meme via API. Our project aims to solve this by developing a lightweight RESTful Java
