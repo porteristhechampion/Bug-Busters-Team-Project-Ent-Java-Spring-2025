@@ -16,6 +16,7 @@ public class CatMemeApplication extends Application {
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(CatMemeResource.class );
+        h.add(Week9ExerciseResource.class);
         return h;
     }
 }

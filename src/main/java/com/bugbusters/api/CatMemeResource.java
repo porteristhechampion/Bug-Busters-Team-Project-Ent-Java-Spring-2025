@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("/cat-meme")
+@Path("/cat-memes")
 public class CatMemeResource {
     // The Java method will process HTTP GET requests
     @GET

@@ -9,6 +9,8 @@
   <url>http://maven.apache.org</url>
   <properties>
     <jersey-version>2.29.1</jersey-version>
+    <log4j-version>2.24.3</log4j-version>
+    <javax-version>7.0</javax-version>
   </properties>
   <dependencies>
     <dependency>
@@ -17,6 +19,25 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- Log4J Dependencies  -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-web-api</artifactId>
+      <version>${javax-version}</version>
+    </dependency>
+
+    <!-- REST dependencies -->
     <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
       <artifactId>jersey-container-servlet</artifactId>
