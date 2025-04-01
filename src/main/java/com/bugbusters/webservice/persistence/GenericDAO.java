@@ -10,4 +10,6 @@ public class GenericDAO {
 
     private Session getSession() {return SessionFactoryProvider.getSessionFactory().openSession();}
 
+
+
 }
