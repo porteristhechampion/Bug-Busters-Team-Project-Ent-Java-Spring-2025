@@ -22,7 +22,7 @@ public class Week9ExerciseResource {
     private HttpServletRequest request;
 
     @GET
-    @Produces("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getMeals() {
 
         memeDao = new GenericDAO();
