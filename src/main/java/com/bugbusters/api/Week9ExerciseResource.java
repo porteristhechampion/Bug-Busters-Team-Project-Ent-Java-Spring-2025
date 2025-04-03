@@ -8,11 +8,15 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.bugbusters.webservice.persistence.GenericDAO;
+import com.bugbusters.webservice.entity.Meme;
 
 @Path("/week9")
 public class Week9ExerciseResource {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
+
+    GenericDAO memeDao;
 
     @Context
     private HttpServletRequest request;
@@ -20,34 +24,14 @@ public class Week9ExerciseResource {
     @GET
     @Produces("text/plain")
     public Response getMeals() {
+
+        memeDao = new GenericDAO();
+
         logger.info("week9 called");
 
-        List<String> cats = new ArrayList<>();
-        cats.add("Bob");
-        cats.add("Spot");
-        cats.add("Violet");
-        cats.add("Josie");
-        cats.add("June");
-        cats.add("April");
-        cats.add("Ana");
-        cats.add("Janis");
-        cats.add("Aggie");
-        cats.add("Amilia");
-        cats.add("Alex");
-        cats.add("Whiskey");
-        cats.add("Zero");
-        cats.add("Solar");
-        cats.add("Ivanhoe");
-        cats.add("Domino");
-        cats.add("Cosmo");
-        cats.add("Amber");
-        cats.add("Larry");
-        cats.add("Curley");
-        cats.add("Moe");
+        List<Meme> memes = memeDao.getAll();
 
-
-
-        return Response.status(200).entity(cats.toString()).build();
+        return Response.status(200).entity(memes).build();
     }
 }
 

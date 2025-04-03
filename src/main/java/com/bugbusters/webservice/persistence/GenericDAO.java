@@ -1,5 +1,6 @@
 package com.bugbusters.webservice.persistence;
 
+import com.bugbusters.webservice.entity.Meme;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
@@ -15,13 +16,14 @@ public class GenericDAO {
 
     private Session getSession() {return SessionFactoryProvider.getSessionFactory().openSession();}
 
-    public List<Object> getAll() {
+    public List<Meme> getAll() {
 
         Session session = getSession();
 
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Object> criteria = builder.createQuery(Object.class);
-        List<Object> list = session.createQuery(criteria).getResultList();
+        CriteriaQuery<Meme> criteria = builder.createQuery(Meme.class);
+        Root<Meme> root = criteria.from(Meme.class);
+        List<Meme> list = session.createQuery(criteria).getResultList();
 
         logger.info(list.toString());
         session.close();
