@@ -12,12 +12,36 @@
     <log4j-version>2.24.3</log4j-version>
     <javax-version>7.0</javax-version>
     <hibernate-version>6.4.3.Final</hibernate-version>
+    <mysql-version>8.0.16</mysql-version>
+    <jstl-version>1.2</jstl-version>
+    <junit.version>4.12</junit.version>
+    <junit-platform-runner-version>1.0.0</junit-platform-runner-version>
+    <junit-vintage-version>4.12.0</junit-vintage-version>
+    <jupiter-version>5.0.0</jupiter-version>
   </properties>
   <dependencies>
     <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-runner</artifactId>
+      <version>${junit-platform-runner-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>${junit-vintage-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${jupiter-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <!-- Log4J Dependencies  -->
@@ -65,6 +89,18 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-c3p0</artifactId>
       <version>${hibernate-version}</version>
+    </dependency>
+
+    <!-- MYSQL -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl-version}</version>
     </dependency>
   </dependencies>
   <build>

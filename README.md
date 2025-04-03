@@ -11,7 +11,6 @@ manipulation, and API design.
 - Dependency Management
   - Maven
 - Backend
-  - Springboot
   - Java
 - Logging
   - Log4J2
