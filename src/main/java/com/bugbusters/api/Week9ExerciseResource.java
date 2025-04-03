@@ -22,7 +22,7 @@ public class Week9ExerciseResource {
     private HttpServletRequest request;
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("text/plain")
     public Response getMeals() {
 
         memeDao = new GenericDAO();
@@ -31,7 +31,7 @@ public class Week9ExerciseResource {
 
         List<Meme> memes = memeDao.getAll();
 
-        return Response.status(200).entity(memes).build();
+        return Response.status(200).entity(memes.toString()).build();
     }
 }
 
