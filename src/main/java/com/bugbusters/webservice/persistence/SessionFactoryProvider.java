@@ -7,10 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
- * This file provides a SessionFactory for use with DAOs using Hibernate
- *
- * @author paulawaite
- * @version 3.0
+ * The type Session factory provider.
  */
 public class SessionFactoryProvider {
 

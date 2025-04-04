@@ -10,12 +10,20 @@ import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
 import java.util.List;
 
+/**
+ * The type Generic dao.
+ */
 public class GenericDAO {
 
     private static final Logger logger = LogManager.getLogger(GenericDAO.class);
 
     private Session getSession() {return SessionFactoryProvider.getSessionFactory().openSession();}
 
+    /**
+     * Gets all memes.
+     *
+     * @return all memes
+     */
     public List<Meme> getAll() {
 
         Session session = getSession();
@@ -29,5 +37,4 @@ public class GenericDAO {
         session.close();
         return list;
     }
-
 }

@@ -12,32 +12,25 @@ import java.sql.Statement;
 import java.util.Properties;
 
 /**
- * Provides access to the database
- * Created on 8/31/16.
- *
- * @author pwaite
- * @author Alex M - Fall 2019 - added multi-line sql capability
+ * The type Database.
  */
-
 public class Database implements PropertiesLoader {
 
     private static final Logger logger = LogManager.getLogger(Database.class);
 
-    // create an object of the class Database
+    // Creates an object of the class Database
     private static Database instance = new Database();
 
     private Properties properties;
     private Connection connection;
 
-    /** private constructor prevents instantiating this class anywhere else
-     **/
+    /**
+     * Instantiates a new Database.
+     */
     public Database() {
         init();
     }
 
-    /** load the properties file containing the driver, connection url, userid and pwd.
-     * Using the loadProperties method from the PropertiesLoader interface
-     */
     private void init() {
         try {
             properties = loadProperties("/database.properties");
@@ -46,21 +39,29 @@ public class Database implements PropertiesLoader {
         }
     }
 
-    /** get the only Database object available
-     @return the single database object
+    /**
+     * Gets instance.
+     *
+     * @return the instance
      */
     public static Database getInstance() {
         return instance;
     }
 
-    /** get the database connection
-     @return the database connection
+
+    /**
+     * Gets connection.
+     *
+     * @return the connection
      */
     public Connection getConnection() {
         return connection;
     }
 
-    /** attempt to connect to the database
+    /**
+     * Connect.
+     *
+     * @throws Exception the exception
      */
     public void connect() throws Exception {
         if (connection != null)
@@ -76,7 +77,8 @@ public class Database implements PropertiesLoader {
         connection = DriverManager.getConnection(url, properties.getProperty("username"),  properties.getProperty("password"));
     }
 
-    /** close and clean up the database connection
+    /**
+     * Disconnect.
      */
     public void disconnect() {
         if (connection != null) {
@@ -91,9 +93,9 @@ public class Database implements PropertiesLoader {
     }
 
     /**
-     * Run the sql.
+     * Run sql.
      *
-     * @param sqlFile the sql file to be read and executed line by line
+     * @param sqlFile the sql file
      */
     public void runSQL(String sqlFile) {
 
@@ -125,6 +127,5 @@ public class Database implements PropertiesLoader {
         } finally {
             disconnect();
         }
-
     }
 }

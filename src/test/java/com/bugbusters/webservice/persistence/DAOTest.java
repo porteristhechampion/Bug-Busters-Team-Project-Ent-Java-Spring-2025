@@ -9,10 +9,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Dao test.
+ */
 public class DAOTest {
 
+    /**
+     * The Dao.
+     */
     GenericDAO dao;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         dao = new GenericDAO();
@@ -20,10 +29,12 @@ public class DAOTest {
         db.runSQL("cleanDB.sql");
     }
 
+    /**
+     * Gets all.
+     */
     @Test
     void getAll() {
         List<Meme> memes = dao.getAll();
         assertEquals(5, memes.size());
     }
-
 }

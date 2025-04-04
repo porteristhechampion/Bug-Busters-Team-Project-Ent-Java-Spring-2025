@@ -11,19 +11,30 @@ import java.util.List;
 import com.bugbusters.webservice.persistence.GenericDAO;
 import com.bugbusters.webservice.entity.Meme;
 
+/**
+ * The type Week 9 exercise resource.
+ */
 @Path("/week9")
 public class Week9ExerciseResource {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     * The Meme dao.
+     */
     GenericDAO memeDao;
 
     @Context
     private HttpServletRequest request;
 
+    /**
+     * Gets memes.
+     *
+     * @return the memes
+     */
     @GET
     @Produces("text/plain")
-    public Response getMeals() {
+    public Response getMemes() {
 
         memeDao = new GenericDAO();
 
