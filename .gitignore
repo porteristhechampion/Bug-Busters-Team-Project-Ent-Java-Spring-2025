@@ -19,7 +19,14 @@
 .idea/uiDesigner.xml
 
 #Ignores Resourced Note you need to supply them locally
-.resources/*
+src/main/resources/hibernate.cfg.xml
+src/test/resources/hibernate.cfg.xml
+src/test/resources/database.properties
+
+
+#Ignore Log Files
+logs/
+*.log
 
 # Gradle:
 .idea/gradle.xml
