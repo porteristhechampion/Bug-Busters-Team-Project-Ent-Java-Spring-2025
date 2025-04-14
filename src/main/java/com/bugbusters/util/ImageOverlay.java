@@ -24,6 +24,9 @@ public class ImageOverlay {
 
             Graphics2D g2d = image.createGraphics();
 
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
             Font font = new Font("Impact", Font.BOLD, width / 10);
             g2d.setFont(font);
             g2d.setColor(Color.WHITE);
@@ -47,6 +50,17 @@ public class ImageOverlay {
     public void drawCenteredText(Graphics2D g2d, String text, int imageWidth, int y, FontMetrics fm) {
         int textWidth = fm.stringWidth(text);
         int x = (imageWidth - textWidth) / 2;
+
+        g2d.setColor(Color.BLACK);
+        for (int offsetX = -2; offsetX <= 2; offsetX++) {
+            for (int offsetY = -2; offsetY <= 2; offsetY++) {
+                if (offsetX != 0 || offsetY != 0) {
+                    g2d.drawString(text, x + offsetX, y + offsetY);
+                }
+            }
+        }
+
+        g2d.setColor(Color.WHITE);
         g2d.drawString(text, x, y);
     }
 
