@@ -9,10 +9,29 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class takes an input file path, output file path, and two strings.
+ * It reads the input file and overlays the first string on the top of the
+ * image and the second string on the bottom of the image with a black border.
+ * It then writes the newly created image with the overlay to the outputfile
+ * path.
+ *
+ * @author ptaylor
+ */
 public class ImageOverlay {
 
     private static final Logger logger = LogManager.getLogger(ImageOverlay.class);
 
+    /**
+     * This method reads an image from the input path, overlays the inputted top and bottom
+     * text in centered white Impact font, and writes the modified image to the specified output
+     * path.
+     *
+     * @param inputImagePath input file path
+     * @param outputImagePath output path
+     * @param topText text for top of overlay
+     * @param bottomText text for bottom of overlay
+     */
     public void overlayText(String inputImagePath, String outputImagePath,
                             String topText, String bottomText) {
 
@@ -47,6 +66,17 @@ public class ImageOverlay {
 
     }
 
+    /**
+     * This method draws the text multiple times in black slightly offset to give the text a black
+     * border. Then it draws the main white text on top. The text is centered horizontally based on
+     * the image width and drawn at the top and bottom of the image.
+     *
+     * @param g2d Graphics2D context
+     * @param text text string
+     * @param imageWidth image width
+     * @param y y-coordinate
+     * @param fm font metrics
+     */
     public void drawCenteredText(Graphics2D g2d, String text, int imageWidth, int y, FontMetrics fm) {
         int textWidth = fm.stringWidth(text);
         int x = (imageWidth - textWidth) / 2;
