@@ -5,38 +5,39 @@
 - [x] Pick team name
 - [x] Create Team Resume
 - [x] Create Team charter/ground rules
-- [x] Create Team Repository on Github
+- [x] Create Team Repository on GitHub
 - [x] Choose API Documentation Framework
 - [x] Push project shell to Repo
-- [x] Create Possible Problem Statement for meme generator - Justin
+- [x] Create Possible Problem Statement for meme generator
 - [x] Give feedback on problem Statement
-- [ ] Finalize problem statement
+- [x] Finalize problem statement
 
-## Week 2: Design
-- [ ] Determine API endpoint's
-- [ ] Define response format (image, JSON)
-- [ ] Determine image source (locally stored, external API's)
-- [ ] Determine response structure (URL to image, metadata)
-- [ ] Setup RESTful service using Spring Boot
-- [ ] Determine Image storage (local disk, cloud storage)
+## Week 2: Research and Design
+- [x] Project Planning
+- [x] Week 9 Exercise
+- [x] Research Needed Technology
+- [x] Determine Project Structure
+- [x] Create Demo Code
+- [x] Review Feedback
 
-## Week 3: Development
-- [ ] Initialize Spring Boot with dependencies
-- [ ] Create API endpoints
-- [ ] Implement image manipulation (resizing)
-- [ ] File I/O implementation
+## Week 3: Research and Project Management
+- [x] Finalize Project Structure
+- [x] Create Deployment Infrastructure on AWS
+- [x] Create Local Development Infrastructure
+- [x] Break apart work and assign tasks
 
-## Week 4: Testing
-- [ ] Test the API endpoints using JUnit and SoapUI
-- [ ] Integration testing ensure system functions in full environment
-- [ ] Write unit tests for each endpoint
+## Week 4: Development
+- [ ] Learn swagger.io
+- [ ] Learn and Adapt Image Overlay code
+- [ ] Learn How To Connect S3 with an API
+- [ ] Update Documentation
 
-## Week 5: Deployment
-- [ ] Deploy service to AWS
-- [ ] Setup monitoring
-- [ ] Test deployment on AWS after initial setup
-
-## Week 6: Documentation
-- [ ] Write API documentation
-- [ ] Add sample requests and responses to documentation
-- [ ] Provide setup and deployment instructions
+## Week 5: Presentation
+- [ ] Test API
+- [ ] Create Presentation Documentation/Review Current Documentation
+- [ ] Create Presentation Script
+- [ ] Record Presentation
+- [ ] Edit Presentation
+- [ ] Post Presentation
+- [ ] Give Feedback On Other Projects
+- [ ] Review Our Project Feedback
