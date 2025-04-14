@@ -37,6 +37,14 @@ Paula Waite
   + Take a vote / poll
   + Flip a coin
 
+## Development Flow
+1. When working on a task first pull to make sure you are up to date with master
+2. Then create a new branch and label it with your name and what you are working on
+3. Use Atomic Commits as you work to complete your task
+4. Create a pull request and assign group members to notify them
+5. A different group member will review the work and merge
+6. If there are conflicts discuss with the group to resolve the issues then Merge
+
 ## Ground Rules:
 1. Treat everyone with respect
 2. Communicate openly and honestly
