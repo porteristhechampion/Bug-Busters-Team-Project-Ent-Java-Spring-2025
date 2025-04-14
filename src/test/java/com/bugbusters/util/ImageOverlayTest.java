@@ -2,7 +2,6 @@ package com.bugbusters.util;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.net.URL;
 
 import static org.junit.Assert.assertNotNull;
@@ -17,9 +16,7 @@ public class ImageOverlayTest {
 
         assertNotNull(imageURL);
 
-        File imageFile = new File(imageURL.getPath());
-
-        imageOverlay.overlayText(imageFile.getPath(), "src/test/resources/images/hibernateMakesMeSad.png", "When you get a", "HIBERNATE error");
+        imageOverlay.overlayText("src/test/resources/images/test.png", "src/test/resources/images/hibernateMakesMeSad.png", "When you get a", "HIBERNATE error");
     }
 
 }
