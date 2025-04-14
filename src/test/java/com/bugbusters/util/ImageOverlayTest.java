@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.net.URL;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class ImageOverlayTest {
@@ -20,7 +19,7 @@ public class ImageOverlayTest {
 
         File imageFile = new File(imageURL.getPath());
 
-        imageOverlay.overlayText(imageFile.getPath(), "hibernateMakesMeSad.png", "When you get a", "hibernate error");
+        imageOverlay.overlayText(imageFile.getPath(), "src/test/resources/images/hibernateMakesMeSad.png", "When you get a", "HIBERNATE error");
     }
 
 }
