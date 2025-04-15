@@ -1,5 +1,6 @@
 package com.bugbusters.service;
 
+import com.bugbusters.util.AwsAuthUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
@@ -34,8 +35,8 @@ public class S3ImageService {
     public S3ImageService(String bucketName, Region region) {
         this.bucketName = bucketName;
         this.s3 = S3Client.builder()
-                .region(region)
-                .credentialsProvider(DefaultCredentialsProvider.create())
+                .region(AwsAuthUtil.getRegion())
+                .credentialsProvider(AwsAuthUtil.getCredentialsProvider())
                 .build();
     }
 
