@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bugbusters</groupId>
   <artifactId>Bug-Busters</artifactId>
@@ -19,8 +19,19 @@
     <junit-vintage-version>4.12.0</junit-vintage-version>
     <jupiter-version>5.0.0</jupiter-version>
     <jackson-version>2.10.0</jackson-version>
+
+    <!-- properties versions for AWS SDK bits -->
+    <aws-sdk>1.12.782</aws-sdk>
+
   </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-runner</artifactId>
@@ -132,6 +143,47 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson-version}</version>
     </dependency>
+    <!--/dependencies-->
+    <!-- Amazon AWS Dependencies for AWS SDK  -->
+    <!--dependencyManagement-->
+    <!--dependencies-->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-bom</artifactId>
+      <version>1.11.837</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+    <!--/dependencies-->
+    <!--/dependencyManagement-->
+
+    <!--dependencies-->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-s3</artifactId>
+      <version>${aws-sdk}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-sts</artifactId>
+      <version>${aws-sdk}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-iam</artifactId>
+      <version>${aws-sdk}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk16</artifactId>
+      <version>1.45</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-kms</artifactId>
+      <version>${aws-sdk}</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>Bug-Busters</finalName>

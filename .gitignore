@@ -22,6 +22,7 @@
 src/main/resources/hibernate.cfg.xml
 src/test/resources/hibernate.cfg.xml
 src/test/resources/database.properties
+src/main/resources/database.properties
 
 
 #Ignore Log Files
