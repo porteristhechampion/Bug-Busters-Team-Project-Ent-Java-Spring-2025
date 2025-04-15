@@ -19,6 +19,8 @@
     <junit-vintage-version>4.12.0</junit-vintage-version>
     <jupiter-version>5.0.0</jupiter-version>
     <jackson-version>2.10.0</jackson-version>
+    <!-- properties versions for AWS SDK bits -->
+    <aws-sdk>2.25.19</aws-sdk>
   </properties>
   <dependencies>
     <dependency>
@@ -132,6 +134,26 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson-version}</version>
     </dependency>
+
+
+<!--AWS Dependencies-->
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>s3</artifactId>
+      <version>${aws-sdk}</version>
+    </dependency>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>auth</artifactId>
+      <version>${aws-sdk}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk16</artifactId>
+      <version>1.45</version>
+    </dependency>
+
+
   </dependencies>
   <build>
     <finalName>Bug-Busters</finalName>
