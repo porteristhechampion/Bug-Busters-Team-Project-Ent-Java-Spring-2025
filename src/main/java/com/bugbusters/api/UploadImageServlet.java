@@ -2,8 +2,8 @@ package com.bugbusters.api;
 
 import com.bugbusters.service.S3ImageService;
 import com.bugbusters.util.ImageOverlay;
-import com.bugbusters.webservice.entity.Meme;
-import com.bugbusters.webservice.persistence.GenericDAO;
+import com.bugbusters.entity.Meme;
+import com.bugbusters.persistence.GenericDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.regions.Region;

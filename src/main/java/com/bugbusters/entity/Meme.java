@@ -1,4 +1,4 @@
-package com.bugbusters.webservice.entity;
+package com.bugbusters.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
