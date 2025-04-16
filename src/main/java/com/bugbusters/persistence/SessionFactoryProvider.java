@@ -1,4 +1,4 @@
-package com.bugbusters.webservice.persistence;
+package com.bugbusters.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;

@@ -12,20 +12,20 @@ import java.sql.Statement;
 import java.util.Properties;
 
 /**
- * The type Database.
+ * Manages the database connection lifecycle and initialization using
+ * configuration from database.properties.
  */
-public class Database implements PropertiesLoader {
+public class Database {
 
     private static final Logger logger = LogManager.getLogger(Database.class);
 
-    // Creates an object of the class Database
     private static Database instance = new Database();
 
     private Properties properties;
     private Connection connection;
 
     /**
-     * Instantiates a new Database.
+     * Instantiates the singleton Database instance and loads configuration.
      */
     public Database() {
         init();
@@ -33,14 +33,14 @@ public class Database implements PropertiesLoader {
 
     private void init() {
         try {
-            properties = loadProperties("/database.properties");
+            properties = PropertiesLoader.load("/database.properties");
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("Failed to load database properties", e);
         }
     }
 
     /**
-     * Gets instance.
+     * Returns the singleton instance of Database.
      *
      * @return the instance
      */
@@ -48,9 +48,8 @@ public class Database implements PropertiesLoader {
         return instance;
     }
 
-
     /**
-     * Gets connection.
+     * Returns the current connection, or null if not connected.
      *
      * @return the connection
      */
@@ -59,9 +58,9 @@ public class Database implements PropertiesLoader {
     }
 
     /**
-     * Connect.
+     * Establishes a connection to the database using the loaded properties.
      *
-     * @throws Exception the exception
+     * @throws Exception if the JDBC driver is missing or connection fails
      */
     public void connect() throws Exception {
         if (connection != null)
@@ -70,22 +69,26 @@ public class Database implements PropertiesLoader {
         try {
             Class.forName(properties.getProperty("driver"));
         } catch (ClassNotFoundException e) {
-            throw new Exception("Database.connect()... Error: MySQL Driver not found");
+            throw new Exception("Database.connect()... Error: JDBC Driver not found");
         }
 
         String url = properties.getProperty("url");
-        connection = DriverManager.getConnection(url, properties.getProperty("username"),  properties.getProperty("password"));
+        connection = DriverManager.getConnection(
+                url,
+                properties.getProperty("username"),
+                properties.getProperty("password")
+        );
     }
 
     /**
-     * Disconnect.
+     * Closes the current database connection if one exists.
      */
     public void disconnect() {
         if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {
-                logger.error(e);
+                logger.error("Failed to disconnect from database", e);
             }
         }
 
@@ -93,37 +96,36 @@ public class Database implements PropertiesLoader {
     }
 
     /**
-     * Run sql.
+     * Executes the SQL statements found in the specified file (semicolon-delimited).
      *
-     * @param sqlFile the sql file
+     * @param sqlFile the file path relative to the classpath
      */
     public void runSQL(String sqlFile) {
-
         Statement stmt = null;
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(classloader.getResourceAsStream(sqlFile))))  {
+
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(classloader.getResourceAsStream(sqlFile)))) {
 
             connect();
             stmt = connection.createStatement();
 
-            String sql = "";
-            while (br.ready())
-            {
-                char inputValue = (char)br.read();
+            StringBuilder sql = new StringBuilder();
+            int ch;
 
-                if(inputValue == ';')
-                {
-                    stmt.executeUpdate(sql);
-                    sql = "";
+            while ((ch = br.read()) != -1) {
+                if ((char) ch == ';') {
+                    stmt.executeUpdate(sql.toString());
+                    sql.setLength(0); // Clear the buffer
+                } else {
+                    sql.append((char) ch);
                 }
-                else
-                    sql += inputValue;
             }
 
         } catch (SQLException se) {
-            logger.error(se);
+            logger.error("SQL error while executing " + sqlFile, se);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("Failed to run SQL script: " + sqlFile, e);
         } finally {
             disconnect();
         }
