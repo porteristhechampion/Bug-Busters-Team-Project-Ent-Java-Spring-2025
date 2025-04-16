@@ -1,5 +1,8 @@
 package com.bugbusters.util;
 
+import java.util.Properties;
+
+import com.bugbusters.util.PropertiesLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,9 +17,25 @@ import java.awt.image.BufferedImage;
  *
  * @author ptaylor
  */
-public class ImageOverlay {
+public class ImageOverlay implements PropertiesLoader{
 
     private static final Logger logger = LogManager.getLogger(ImageOverlay.class);
+
+    private final String fontName;
+    private final double fontSizeFactor;
+    private final int offset;
+    private final int paddingTop;
+    private final int paddingBottom;
+
+    public ImageOverlay() {
+        Properties properties = loadProperties("/overlay.properties");
+
+        fontName = properties.getProperty("font.name");
+        fontSizeFactor = Double.parseDouble(properties.getProperty("font.size.factor"));
+        offset = Integer.parseInt(properties.getProperty("outline.offset"));
+        paddingTop = Integer.parseInt(properties.getProperty("text.padding.top"));
+        paddingBottom = Integer.parseInt(properties.getProperty("text.padding.bottom"));
+    }
 
     /**
      * This method receives an image, overlays the inputted top and bottom
@@ -36,14 +55,16 @@ public class ImageOverlay {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        Font font = new Font("Impact", Font.BOLD, width / 10);
+        int fontSize = (int)(width * fontSizeFactor);
+
+        Font font = new Font(fontName, Font.BOLD, fontSize);
         g2d.setFont(font);
         g2d.setColor(Color.WHITE);
 
         FontMetrics fm = g2d.getFontMetrics();
 
-        drawCenteredText(g2d, topText, width, fm.getAscent() + 10, fm);
-        drawCenteredText(g2d, bottomText, width, height - fm.getDescent() - 10, fm);
+        drawCenteredText(g2d, topText, width, fm.getAscent() + paddingTop, fm);
+        drawCenteredText(g2d, bottomText, width, height - fm.getDescent() - paddingBottom, fm);
 
         g2d.dispose();
 
@@ -68,8 +89,8 @@ public class ImageOverlay {
         int x = (imageWidth - textWidth) / 2;
 
         g2d.setColor(Color.BLACK);
-        for (int offsetX = -2; offsetX <= 2; offsetX++) {
-            for (int offsetY = -2; offsetY <= 2; offsetY++) {
+        for (int offsetX = -offset; offsetX <= offset; offsetX++) {
+            for (int offsetY = -offset; offsetY <= offset; offsetY++) {
                 if (offsetX != 0 || offsetY != 0) {
                     g2d.drawString(text, x + offsetX, y + offsetY);
                 }

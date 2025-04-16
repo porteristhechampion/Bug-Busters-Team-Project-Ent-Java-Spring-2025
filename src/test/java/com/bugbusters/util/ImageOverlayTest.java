@@ -34,7 +34,7 @@ public class ImageOverlayTest {
 
             assertNotNull(image);
 
-            imageOverlay.overlayText(image, "When you get a", "HIBERNATE error");
+            imageOverlay.overlayText(image, "WHEN YOU ADD", "123451234512345");
 
             ImageIO.write(image, "png", new File("src/test/resources/images/testOutput.png"));
 
