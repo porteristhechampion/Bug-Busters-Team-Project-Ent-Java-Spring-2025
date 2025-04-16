@@ -25,7 +25,7 @@ public class UploadImageServlet extends HttpServlet {
 
     private final S3ImageService s3Service = new S3ImageService("bug-busters-cat-meme", Region.US_EAST_2);
     private final ImageOverlay imageOverlay = new ImageOverlay();
-    private final GenericDAO<Meme> memeDao;
+    private GenericDAO<Meme> memeDao;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -66,16 +66,14 @@ public class UploadImageServlet extends HttpServlet {
             s3Service.uploadImage(fileName, memeImage);
 
             //Save to DB
-            Meme meme = new Meme(publicUrl);
-            int memeId = memeDao.insert(meme);
+            Meme meme = new Meme(publicUrl, topText, bottomText);
+            Meme insertedMeme = memeDao.insert(meme);
 
             //Return result to client
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.setContentType("application/json");
-            response.getWriter().write(meme.toString());
+            response.getWriter().write(insertedMeme.toString());
 
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write("Image uploaded successfully to S3 as: " + fileName);
         } catch (Exception e) {
             logger.error("Failed to upload image", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
