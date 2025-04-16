@@ -11,10 +11,19 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * This class tests the image overlay class.
+ *
+ * @author ptaylor
+ */
 public class ImageOverlayTest {
 
     private static final Logger logger = LogManager.getLogger(ImageOverlay.class);
 
+    /**
+     * This method tests the overlayText method in the image
+     * overlay class.
+     */
     @Test
     public void testImageOverlay() {
 

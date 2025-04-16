@@ -3,18 +3,14 @@ package com.bugbusters.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
- * This class takes an input file path, output file path, and two strings.
+ * This class takes an input image file, and two strings.
  * It reads the input file and overlays the first string on the top of the
  * image and the second string on the bottom of the image with a black border.
- * It then writes the newly created image with the overlay to the outputfile
- * path.
+ * It then writes the newly created image with the overlay and returns it.
  *
  * @author ptaylor
  */
@@ -23,9 +19,8 @@ public class ImageOverlay {
     private static final Logger logger = LogManager.getLogger(ImageOverlay.class);
 
     /**
-     * This method reads an image from the input path, overlays the inputted top and bottom
-     * text in centered white Impact font, and writes the modified image to the specified output
-     * path.
+     * This method receives an image, overlays the inputted top and bottom
+     * text in centered white Impact font, and returns the modified image.
      *
      * @param image      input image file
      * @param topText    text for top of overlay
