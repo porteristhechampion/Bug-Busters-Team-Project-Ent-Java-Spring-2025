@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  *
  * @author ptaylor
  */
-public class ImageOverlay implements PropertiesLoader{
+public class ImageOverlay {
 
     private static final Logger logger = LogManager.getLogger(ImageOverlay.class);
 
@@ -28,7 +28,7 @@ public class ImageOverlay implements PropertiesLoader{
     private final int paddingBottom;
 
     public ImageOverlay() {
-        Properties properties = loadProperties("/overlay.properties");
+        Properties properties = PropertiesLoader.load("/overlay.properties");
 
         fontName = properties.getProperty("font.name");
         fontSizeFactor = Double.parseDouble(properties.getProperty("font.size.factor"));
