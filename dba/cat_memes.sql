@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS memes;
 CREATE TABLE IF NOT EXISTS memes
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
-    ur          TEXT NOT NULL,
+    url          TEXT NOT NULL,
     text_top    VARCHAR(55),
     text_bottom VARCHAR(55),
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP

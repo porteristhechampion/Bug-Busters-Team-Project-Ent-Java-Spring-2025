@@ -1,8 +1,10 @@
 package com.bugbusters.webservice.entity;
 
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * The type Meme.
@@ -10,67 +12,73 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "memes")
 public class Meme {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private int id;
-
-    @Column (name = "url", nullable = false)
+    @Column(name = "url", nullable = false)
     private String url;
+    @Column(name = "text_top")
+    private String textTop;
+    @Column(name = "text_bottom")
+    private String textBottom;
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
-    /**
-     * Instantiates a new Meme.
-     */
-    public Meme() {}
-
-    /**
-     * Instantiates a new Meme.
-     *
-     * @param url the url
-     */
-    public Meme(String url) {
-        this.url = url;
+    public Meme() {
     }
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
+    public Meme(String url, String textTop, String textBottom) {
+        this.url = url;
+        this.textTop = textTop;
+        this.textBottom = textBottom;
+    }
+
     public int getId() {
         return id;
     }
 
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * Gets url.
-     *
-     * @return the url
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * Sets url.
-     *
-     * @param url the url
-     */
     public void setUrl(String url) {
         this.url = url;
     }
 
+    public String getTextTop() {
+        return textTop;
+    }
+
+    public void setTextTop(String textTop) {
+        this.textTop = textTop;
+    }
+
+    public String getTextBottom() {
+        return textBottom;
+    }
+
+    public void setTextBottom(String textBottom) {
+        this.textBottom = textBottom;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     @Override
     public String toString() {
-        return "Meme [id=" + id + ", url=" + url + "]";
+        return "Meme{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", textTop='" + textTop + '\'' +
+                ", textBottom='" + textBottom + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }
