@@ -27,42 +27,33 @@ public class ImageOverlay {
      * text in centered white Impact font, and writes the modified image to the specified output
      * path.
      *
-     * @param inputImagePath input file path
-     * @param outputImagePath output path
-     * @param topText text for top of overlay
+     * @param image      input image file
+     * @param topText    text for top of overlay
      * @param bottomText text for bottom of overlay
      */
-    public void overlayText(String inputImagePath, String outputImagePath,
-                            String topText, String bottomText) {
+    public BufferedImage overlayText(BufferedImage image, String topText, String bottomText) {
 
-        try {
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-            BufferedImage image = ImageIO.read(new File(inputImagePath));
-            int width = image.getWidth();
-            int height = image.getHeight();
+        Graphics2D g2d = image.createGraphics();
 
-            Graphics2D g2d = image.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        Font font = new Font("Impact", Font.BOLD, width / 10);
+        g2d.setFont(font);
+        g2d.setColor(Color.WHITE);
 
-            Font font = new Font("Impact", Font.BOLD, width / 10);
-            g2d.setFont(font);
-            g2d.setColor(Color.WHITE);
+        FontMetrics fm = g2d.getFontMetrics();
 
-            FontMetrics fm = g2d.getFontMetrics();
+        drawCenteredText(g2d, topText, width, fm.getAscent() + 10, fm);
+        drawCenteredText(g2d, bottomText, width, height - fm.getDescent() - 10, fm);
 
-            drawCenteredText(g2d, topText, width, fm.getAscent() + 10, fm);
-            drawCenteredText(g2d, bottomText, width, height - fm.getDescent() - 10, fm);
+        g2d.dispose();
 
-            g2d.dispose();
-
-            ImageIO.write(image, "png", new File(outputImagePath));
-            logger.info("Overlay complete. " + outputImagePath + " was successfully created.");
-
-        } catch (IOException io) {
-            logger.error(io);
-        }
+        logger.info("Overlay complete.");
+        return image;
 
     }
 
@@ -71,11 +62,11 @@ public class ImageOverlay {
      * border. Then it draws the main white text on top. The text is centered horizontally based on
      * the image width and drawn at the top and bottom of the image.
      *
-     * @param g2d Graphics2D context
-     * @param text text string
+     * @param g2d        Graphics2D context
+     * @param text       text string
      * @param imageWidth image width
-     * @param y y-coordinate
-     * @param fm font metrics
+     * @param y          y-coordinate
+     * @param fm         font metrics
      */
     public void drawCenteredText(Graphics2D g2d, String text, int imageWidth, int y, FontMetrics fm) {
         int textWidth = fm.stringWidth(text);
