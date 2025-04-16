@@ -3,34 +3,39 @@ package com.bugbusters.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * The interface Properties loader.
+ * Utility class for loading properties files from the classpath.
  */
-public interface PropertiesLoader {
+public final class PropertiesLoader {
+
+    private static final Logger logger = LogManager.getLogger(PropertiesLoader.class);
+
+    private PropertiesLoader() {
+        // Prevent instantiation
+    }
 
     /**
-     * The constant logger.
-     */
-    static final Logger logger = LogManager.getLogger(PropertiesLoader.class);
-
-    /**
-     * Load properties properties.
+     * Loads a .properties file from the classpath into a Properties object.
      *
-     * @param propertiesFilePath the properties file path
-     * @return the properties
+     * @param filePath the path to the properties file (e.g. "database.properties" or "/config/myprops.properties")
+     * @return loaded Properties object, or empty if file not found or an error occurs
      */
-    default Properties loadProperties(String propertiesFilePath){
+    public static Properties load(String filePath) {
         Properties properties = new Properties();
-        try {
-            properties.load(this.getClass().getResourceAsStream(propertiesFilePath));
-        } catch (IOException ioException) {
-            logger.error(ioException);
-        } catch (Exception exception) {
-            logger.error(exception);
+
+        try (InputStream input = PropertiesLoader.class.getResourceAsStream(filePath)) {
+            if (input != null) {
+                properties.load(input);
+            } else {
+                logger.warn("Properties file not found: " + filePath);
+            }
+        } catch (Exception e) {
+            logger.error("Failed to load properties file: " + filePath, e);
         }
+
         return properties;
     }
 }
