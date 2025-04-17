@@ -1,0 +1,9 @@
+branch-defaults:
+  default:
+    environment: Bug-busters-env
+global:
+  application_name: bug-busters
+  default_region: us-east-2
+  platform: Tomcat 8.5 with Corretto 11
+  profile: default
+  workspace_type: Application
