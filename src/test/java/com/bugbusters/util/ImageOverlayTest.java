@@ -30,13 +30,19 @@ public class ImageOverlayTest {
         ImageOverlay imageOverlay = new ImageOverlay();
 
         try {
-            BufferedImage image = ImageIO.read(new File("src/test/resources/images/test.png"));
+            BufferedImage image1 = ImageIO.read(new File("src/test/resources/images/test.png"));
+            BufferedImage image2 = ImageIO.read(new File("src/test/resources/images/test.png"));
 
-            assertNotNull(image);
+            assertNotNull(image1);
+            assertNotNull(image2);
 
-            imageOverlay.overlayText(image, "WHEN YOU ADD", "123451234512345");
+            imageOverlay.overlayText(image1, "NOBODY KNOWS", "I'M BARELY HOLDING IT TOGETHER");
 
-            ImageIO.write(image, "png", new File("src/test/resources/images/testOutput.png"));
+            ImageIO.write(image1, "png", new File("src/test/resources/images/testOutput.png"));
+
+            imageOverlay.overlayText(image2, "ONE SPACEBAR CAN CHANGE THE WORD \"NOWHERE\" TO \"NOW HERE\"", "UNTIL WE MEET AGAIN");
+
+            ImageIO.write(image2, "png", new File("src/test/resources/images/testOutput2.png"));
 
         } catch (IOException io) {
 
