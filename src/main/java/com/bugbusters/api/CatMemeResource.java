@@ -4,9 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
+import com.bugbusters.dto.MemeUploadRequest;
 import com.bugbusters.entity.Meme;
 import com.bugbusters.persistence.GenericDAO;
 import com.bugbusters.service.S3ImageService;
@@ -107,10 +109,20 @@ public class CatMemeResource {
      * a JSON body of the created {@link Meme}; or an appropriate error status
      * if validation or processing fails.
      */
-    @Operation(summary = "Create a new meme", description = "Upload an image with overlay text to create a meme and save it.")
+    @Operation(
+            summary = "Create a new meme",
+            description = "Upload an image with overlay text to create a meme and save it.",
+            requestBody = @RequestBody(
+                    required = true,
+                    content = @Content(
+                            mediaType = MediaType.MULTIPART_FORM_DATA,
+                            schema = @Schema(implementation = MemeUploadRequest.class)
+                    )
+            )
+    )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Meme created successfully",
-                    content = @Content(mediaType = "application/json",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = Meme.class))),
             @ApiResponse(responseCode = "400", description = "Bad request, missing or invalid input"),
             @ApiResponse(responseCode = "415", description = "Unsupported media type, invalid image format"),
@@ -120,14 +132,9 @@ public class CatMemeResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(
-            @Parameter(description = "Image to upload for the meme", required = true,
-                    content = @Content(mediaType = "multipart/form-data",
-                            schema = @Schema(type = "string", format = "binary")))
             @FormDataParam("image") InputStream imageStream,
             @FormDataParam("image") FormDataContentDisposition fileDetail,
-            @Parameter(description = "Top text to overlay on the image")
             @FormDataParam("topText") String topText,
-            @Parameter(description = "Bottom text to overlay on the image")
             @FormDataParam("bottomText") String bottomText,
             @Context UriInfo uriInfo
     ) {
