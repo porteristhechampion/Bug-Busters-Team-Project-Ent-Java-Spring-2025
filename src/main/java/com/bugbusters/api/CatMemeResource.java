@@ -1,5 +1,12 @@
 package com.bugbusters.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import com.bugbusters.entity.Meme;
 import com.bugbusters.persistence.GenericDAO;
 import com.bugbusters.service.S3ImageService;
@@ -26,14 +33,20 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class CatMemeResource {
 
-    /** DAO for persisting and querying Meme entities. */
+    /**
+     * DAO for persisting and querying Meme entities.
+     */
     private final GenericDAO<Meme> memeDao = new GenericDAO<>(Meme.class);
 
-    /** Service for uploading images to AWS S3. */
+    /**
+     * Service for uploading images to AWS S3.
+     */
     private final S3ImageService s3Service =
             new S3ImageService("bug-busters-cat-meme", Region.US_EAST_2);
 
-    /** Utility for overlaying text onto images. */
+    /**
+     * Utility for overlaying text onto images.
+     */
     private final ImageOverlay imageOverlay = new ImageOverlay();
 
     /**
@@ -41,6 +54,13 @@ public class CatMemeResource {
      *
      * @return HTTP 200 with a JSON array of all {@link Meme} objects.
      */
+    @Operation(summary = "Get all memes", description = "Retrieves a list of all cat memes stored in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved the memes",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Meme.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GET
     public Response getAll() {
         List<Meme> memes = memeDao.getAll();
@@ -52,11 +72,19 @@ public class CatMemeResource {
      *
      * @param id the primary key of the meme to fetch.
      * @return HTTP 200 with the {@link Meme} if found;
-     *         HTTP 404 with an error message if not found.
+     * HTTP 404 with an error message if not found.
      */
+    @Operation(summary = "Get a meme by ID", description = "Retrieves a single cat meme by its unique ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved the meme",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Meme.class))),
+            @ApiResponse(responseCode = "404", description = "Meme not found")
+    })
     @GET
     @Path("{id}")
-    public Response getById(@PathParam("id") int id) {
+    public Response getById(@Parameter(description = "ID of the meme to retrieve", required = true)
+                            @PathParam("id") int id) {
         Meme meme = memeDao.getById(id);
         if (meme == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -70,21 +98,36 @@ public class CatMemeResource {
      * Creates a new meme by uploading an image, overlaying text, saving it to S3,
      * and persisting a record in the database.
      *
-     * @param imageStream  InputStream of the uploaded image; must not be {@code null}.
-     * @param fileDetail   Metadata about the uploaded file (e.g., original filename).
-     * @param topText      Text to overlay at the top of the image.
-     * @param bottomText   Text to overlay at the bottom of the image.
-     * @param uriInfo      Context for building the Location header URI.
+     * @param imageStream InputStream of the uploaded image; must not be {@code null}.
+     * @param fileDetail  Metadata about the uploaded file (e.g., original filename).
+     * @param topText     Text to overlay at the top of the image.
+     * @param bottomText  Text to overlay at the bottom of the image.
+     * @param uriInfo     Context for building the Location header URI.
      * @return HTTP 201 with Location header pointing to the new resource and
-     *         a JSON body of the created {@link Meme}; or an appropriate error status
-     *         if validation or processing fails.
+     * a JSON body of the created {@link Meme}; or an appropriate error status
+     * if validation or processing fails.
      */
+    @Operation(summary = "Create a new meme", description = "Upload an image with overlay text to create a meme and save it.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Meme created successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Meme.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request, missing or invalid input"),
+            @ApiResponse(responseCode = "415", description = "Unsupported media type, invalid image format"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(
+            @Parameter(description = "Image to upload for the meme", required = true,
+                    content = @Content(mediaType = "multipart/form-data",
+                            schema = @Schema(type = "string", format = "binary")))
             @FormDataParam("image") InputStream imageStream,
             @FormDataParam("image") FormDataContentDisposition fileDetail,
+            @Parameter(description = "Top text to overlay on the image")
             @FormDataParam("topText") String topText,
+            @Parameter(description = "Bottom text to overlay on the image")
             @FormDataParam("bottomText") String bottomText,
             @Context UriInfo uriInfo
     ) {
