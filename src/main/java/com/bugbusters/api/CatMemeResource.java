@@ -104,15 +104,14 @@ public class CatMemeResource {
 
             // Overlay text and upload to S3
             BufferedImage memeImg = imageOverlay.overlayText(src, topText, bottomText);
-            String fileName = "memes/"
-                    + fileDetail.getFileName()
-                    + "_"
-                    + System.currentTimeMillis()
-                    + ".png";
-            s3Service.uploadImage(fileName, memeImg);
 
+            // build a safe filename
+            String keyName = String.format("memes/pepe-%d.png", System.currentTimeMillis());
+
+            // upload & assemble URL
+            s3Service.uploadImage(keyName, memeImg);
             String publicUrl = "https://bug-busters-cat-meme.s3.us-east-2.amazonaws.com/"
-                    + fileName;
+                    + keyName;
 
             // Persist in database
             Meme newMeme = new Meme(publicUrl, topText, bottomText);
