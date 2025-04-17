@@ -29,3 +29,4 @@
 | 04/12/2025 | Jared       | Team meeting      | 4     | [Meetings List](team-meetings.md)                             |
 | 04/12/2025 | Justin      | Team meeting      | 4     | [Meetings List](team-meetings.md)                             |
 | 04/12/2025 | Porter      | Team meeting      | 4     | [Meetings List](team-meetings.md)                             |
+| 04/16/2025 | Justin      | Project Structure | 0.5   | Troubleshoot logs, update pom                                 |
