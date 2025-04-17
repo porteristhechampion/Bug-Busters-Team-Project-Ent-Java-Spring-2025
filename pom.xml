@@ -19,6 +19,8 @@
         <junit-vintage-version>4.12.0</junit-vintage-version>
         <jupiter-version>5.0.0</jupiter-version>
         <jackson-version>2.10.0</jackson-version>
+        <swagger-version>2.2.5</swagger-version>
+        <swagger-ui-version>4.5.0</swagger-ui-version>
         <!-- properties versions for AWS SDK bits -->
         <aws-sdk>2.25.19</aws-sdk>
     </properties>
@@ -93,12 +95,12 @@
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-multipart</artifactId>
+            <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey-version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
+            <artifactId>jersey-media-multipart</artifactId>
             <version>${jersey-version}</version>
         </dependency>
 
@@ -145,7 +147,6 @@
             <version>${jackson-version}</version>
         </dependency>
 
-
         <!--AWS Dependencies-->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
@@ -161,6 +162,41 @@
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk16</artifactId>
             <version>1.45</version>
+        </dependency>
+
+        <!-- Swagger Core -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>${swagger-version}</version>
+        </dependency>
+
+        <!-- Swagger UI -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>swagger-ui</artifactId>
+            <version>${swagger-ui-version}</version>
+        </dependency>
+
+        <!-- Swagger Integration -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-integration</artifactId>
+            <version>${swagger-version}</version>
+        </dependency>
+
+        <!-- Swagger Annotations -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-version}</version>
+        </dependency>
+
+        <!-- Swagger Annotations -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2-servlet-initializer</artifactId>
+            <version>${swagger-version}</version>
         </dependency>
 
     </dependencies>
