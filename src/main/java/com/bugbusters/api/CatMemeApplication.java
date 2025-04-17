@@ -2,24 +2,24 @@ package com.bugbusters.api;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * The type Cat meme application.
- */
-//Defines the base URI for all resource URIs.
-@ApplicationPath("/api") //You may want to add a value here so that all traffic isn't routed to the class below.
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.jackson.JacksonFeature;
 
-//The java class declares root resource and provider classes
+@ApplicationPath("/api")
 public class CatMemeApplication extends Application {
-
-    //The method returns a non-empty collection with classes, that must be included in the published JAX-RS application
     @Override
     public Set<Class<?>> getClasses() {
-        HashSet h = new HashSet<Class<?>>();
-        h.add(CatMemeResource.class );
-        return h;
+        Set<Class<?>> classes = new HashSet<>();
+        // your resource(s)
+        classes.add(CatMemeResource.class);
+        // enable multipart/form-data
+        classes.add(MultiPartFeature.class);
+        // enable JSON <-> POJO marshalling
+        classes.add(JacksonFeature.class);
+        return classes;
     }
 }
-

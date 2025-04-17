@@ -17,8 +17,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-@WebServlet("/api/cat-meme")
-@MultipartConfig
+//@WebServlet("/api/cat-meme")
+//@MultipartConfig
 public class UploadImageServlet extends HttpServlet {
 
     private static final Logger logger = LogManager.getLogger(UploadImageServlet.class);
