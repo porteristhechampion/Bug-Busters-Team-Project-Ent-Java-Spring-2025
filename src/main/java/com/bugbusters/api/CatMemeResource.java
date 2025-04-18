@@ -31,7 +31,7 @@ import java.util.List;
  * Base URI: <code>/api/cat-memes</code>
  * </p>
  */
-@Path("/cat-memes")
+@Path("cat-memes")
 @Produces(MediaType.APPLICATION_JSON)
 public class CatMemeResource {
 

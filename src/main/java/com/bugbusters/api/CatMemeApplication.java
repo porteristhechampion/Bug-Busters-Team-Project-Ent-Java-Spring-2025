@@ -6,6 +6,7 @@ import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.jackson.JacksonFeature;
 
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import java.util.Set;
                 description = "Upload an image, add text overlays, store in S3 & the DB."
         )
 )
+@ApplicationPath("/api")
 public class CatMemeApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
