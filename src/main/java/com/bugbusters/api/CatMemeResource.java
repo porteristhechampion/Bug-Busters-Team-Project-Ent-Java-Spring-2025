@@ -30,9 +30,12 @@ import java.util.List;
 /**
  * This class is a RESTful API controller that handles HTTP requests related to
  * uploading, retrieving, and listing cat memes.
+ *
  * <p>
  * Base URI: <code>/api/cat-memes</code>
  * </p>
+ *
+ * @author Justin Gritton-Bell
  */
 @Path("cat-memes")
 @Produces(MediaType.APPLICATION_JSON)
@@ -145,22 +148,17 @@ public class CatMemeResource {
                         .build();
             }
 
-            // Overlay text and upload to S3
             BufferedImage memeImg = imageOverlay.overlayText(src, topText, bottomText);
 
-            // build a safe filename
             String keyName = String.format("memes/pepe-%d.png", System.currentTimeMillis());
 
-            // upload & assemble URL
             s3Service.uploadImage(keyName, memeImg);
             String publicUrl = "https://bug-busters-cat-meme.s3.us-east-2.amazonaws.com/"
                     + keyName;
 
-            // Persist in database
             Meme newMeme = new Meme(publicUrl, topText, bottomText);
             Meme inserted = memeDao.insert(newMeme);
 
-            // Build URI for Location header: /api/cat-memes/{id}
             URI createdUri = uriInfo.getAbsolutePathBuilder()
                     .path(String.valueOf(inserted.getId()))
                     .build();
