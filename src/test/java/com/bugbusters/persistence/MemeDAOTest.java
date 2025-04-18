@@ -1,6 +1,5 @@
 package com.bugbusters.persistence;
 
-import com.bugbusters.persistence.GenericDAO;
 import com.bugbusters.util.Database;
 import com.bugbusters.entity.Meme;
 import org.junit.jupiter.api.BeforeEach;

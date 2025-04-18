@@ -14,6 +14,10 @@ import java.util.Properties;
 /**
  * Manages the database connection lifecycle and initialization using
  * configuration from database.properties.
+ *
+ * @author pwaite 8/31/16
+ * @author Alex M - Fall 2019
+ * @author Justin Gritton-Bell Spring 2025
  */
 public class Database {
 

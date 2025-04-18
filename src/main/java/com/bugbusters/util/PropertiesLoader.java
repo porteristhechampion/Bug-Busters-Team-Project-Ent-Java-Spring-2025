@@ -8,20 +8,24 @@ import java.util.Properties;
 
 /**
  * Utility class for loading properties files from the classpath.
+ *
+ * @author Justin Gritton-Bell
  */
 public final class PropertiesLoader {
 
     private static final Logger logger = LogManager.getLogger(PropertiesLoader.class);
 
+    /**
+     * Constructor to prevent instantiation.
+     */
     private PropertiesLoader() {
-        // Prevent instantiation
     }
 
     /**
      * Loads a .properties file from the classpath into a Properties object.
      *
-     * @param filePath the path to the properties file (e.g. "/database.properties" or "/config/myprops.properties")
-     * @return loaded Properties object, or empty if file not found or an error occurs
+     * @param filePath properties file path
+     * @return properties object || null
      */
     public static Properties load(String filePath) {
         Properties properties = new Properties();
