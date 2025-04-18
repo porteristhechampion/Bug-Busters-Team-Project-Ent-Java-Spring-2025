@@ -9,19 +9,12 @@ import software.amazon.awssdk.regions.providers.DefaultAwsRegionProviderChain;
 import java.util.Properties;
 
 /**
- * Utility class for resolving AWS credentials and region with fallback support.
+ * This class is a utility class for resolving AWS credentials and region settings.
+ * It first attempts to use the standard AWS SDK default provider chain for credentials
+ * and region. If that fails, it falls back to loading values from a local properties
+ * file. As a final fallback for region, a hardcoded default value is used.
  *
- * Order of resolution:
- *
- * - Credentials:
- *   1. DefaultCredentialsProvider (environment variables, EC2/ECS IAM role, etc.)
- *   2. Local aws.properties file (for local development)
- *   3. Throws exception if none found
- *
- * - Region:
- *   1. DefaultAwsRegionProviderChain (AWS_REGION env var, EC2 metadata, etc.)
- *   2. aws.properties file
- *   3. Hardcoded fallback region
+ * @author Justin Gritton-Bell
  */
 public class AwsAuthUtil {
 
@@ -31,10 +24,11 @@ public class AwsAuthUtil {
     private static final Region DEFAULT_REGION = Region.US_EAST_2;
 
     /**
-     * Attempts to resolve AWS credentials using the preferred default provider chain.
-     * Falls back to static credentials loaded from aws.properties if necessary.
+     * Attempts to resolve AWS credentials using the standard AWS SDK default provider chain.
+     * If that fails it falls back to static credentials loaded from aws.properties.
      *
      * @return a valid AwsCredentialsProvider
+     * @throws RuntimeException if no valid credentials are found
      */
     public static AwsCredentialsProvider getCredentialsProvider() {
         try {
@@ -46,7 +40,6 @@ public class AwsAuthUtil {
             logger.warn("DefaultCredentialsProvider failed: " + e.getMessage());
         }
 
-        // Fallback to local aws.properties
         Properties props = PropertiesLoader.load(PROPERTIES_FILE);
         String accessKey = props.getProperty("aws.accessKeyId");
         String secretKey = props.getProperty("aws.secretAccessKey");
@@ -62,7 +55,8 @@ public class AwsAuthUtil {
 
     /**
      * Attempts to resolve the AWS region using the default AWS provider chain.
-     * Falls back to the aws.properties file, then a hardcoded default region.
+     * Falls back to the aws.properties file, if still invalid, defaults to a
+     * hardcoded default region.
      *
      * @return the resolved AWS Region
      */
