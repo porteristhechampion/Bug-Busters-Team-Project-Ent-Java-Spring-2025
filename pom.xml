@@ -238,7 +238,6 @@
                 <configuration>
                     <source>9</source>
                     <target>9</target>
-                    <mainClass>com.bugbusters.util.LogTest</mainClass>
                 </configuration>
             </plugin>
         </plugins>
