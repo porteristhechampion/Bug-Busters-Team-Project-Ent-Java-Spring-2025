@@ -5,8 +5,8 @@
     <artifactId>Bug-Busters</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Bug-Busters Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <name>Bug-Busters</name>
+    <url>http://bug-busters-env.eba-v2sy7uyg.us-east-2.elasticbeanstalk.com</url>
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
@@ -28,6 +28,8 @@
         <aws-sdk>2.25.19</aws-sdk>
     </properties>
     <dependencies>
+
+        <!--junit Dependencies-->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
@@ -63,7 +65,11 @@
             <artifactId>log4j-core</artifactId>
             <version>${log4j-version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -232,6 +238,7 @@
                 <configuration>
                     <source>9</source>
                     <target>9</target>
+                    <mainClass>com.bugbusters.util.LogTest</mainClass>
                 </configuration>
             </plugin>
         </plugins>
