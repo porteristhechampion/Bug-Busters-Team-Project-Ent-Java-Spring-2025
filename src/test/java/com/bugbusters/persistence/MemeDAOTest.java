@@ -1,4 +1,4 @@
-package com.bugbusters.webservice.persistence;
+package com.bugbusters.persistence;
 
 import com.bugbusters.persistence.GenericDAO;
 import com.bugbusters.util.Database;
@@ -30,8 +30,7 @@ public class MemeDAOTest {
     }
 
     /**
-     * Returns all memes stored in the
-     * database.
+     * Tests getAll method in DAO.
      */
     @Test
     void getAll() {
@@ -41,8 +40,7 @@ public class MemeDAOTest {
     }
 
     /**
-     * Returns a meme associated with
-     * the given id.
+     * Tests getById method in DAO.
      */
     @Test
     void getById() {
@@ -52,8 +50,7 @@ public class MemeDAOTest {
     }
 
     /**
-     * Inserts a new meme into the
-     * database.
+     * Tests insert method in DAO.
      */
     @Test
     void insert() {
