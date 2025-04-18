@@ -13,6 +13,8 @@ import com.bugbusters.entity.Meme;
 import com.bugbusters.persistence.GenericDAO;
 import com.bugbusters.service.S3ImageService;
 import com.bugbusters.util.ImageOverlay;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import software.amazon.awssdk.regions.Region;
@@ -26,35 +28,32 @@ import java.net.URI;
 import java.util.List;
 
 /**
- * JAX‑RS resource exposing RESTful endpoints for creating and retrieving cat memes.
+ * This class is a RESTful API controller that handles HTTP requests related to
+ * uploading, retrieving, and listing cat memes.
+ *
  * <p>
  * Base URI: <code>/api/cat-memes</code>
  * </p>
+ *
+ * @author Justin Gritton-Bell
  */
 @Path("cat-memes")
 @Produces(MediaType.APPLICATION_JSON)
 public class CatMemeResource {
 
-    /**
-     * DAO for persisting and querying Meme entities.
-     */
+    private static final Logger logger = LogManager.getLogger(CatMemeResource.class);
+
     private final GenericDAO<Meme> memeDao = new GenericDAO<>(Meme.class);
 
-    /**
-     * Service for uploading images to AWS S3.
-     */
     private final S3ImageService s3Service =
             new S3ImageService("bug-busters-cat-meme", Region.US_EAST_2);
 
-    /**
-     * Utility for overlaying text onto images.
-     */
     private final ImageOverlay imageOverlay = new ImageOverlay();
 
     /**
-     * Retrieves all memes.
+     * Retrieves all memes from the database.
      *
-     * @return HTTP 200 with a JSON array of all {@link Meme} objects.
+     * @return JSON array of Meme objects
      */
     @Operation(summary = "Get all memes", description = "Retrieves a list of all cat memes stored in the system.")
     @ApiResponses(value = {
@@ -72,9 +71,8 @@ public class CatMemeResource {
     /**
      * Retrieves a single meme by its ID.
      *
-     * @param id the primary key of the meme to fetch.
-     * @return HTTP 200 with the {@link Meme} if found;
-     * HTTP 404 with an error message if not found.
+     * @param id the primary key
+     * @return ok status with meme || not found status
      */
     @Operation(summary = "Get a meme by ID", description = "Retrieves a single cat meme by its unique ID.")
     @ApiResponses(value = {
@@ -100,14 +98,12 @@ public class CatMemeResource {
      * Creates a new meme by uploading an image, overlaying text, saving it to S3,
      * and persisting a record in the database.
      *
-     * @param imageStream InputStream of the uploaded image; must not be {@code null}.
-     * @param fileDetail  Metadata about the uploaded file (e.g., original filename).
+     * @param imageStream InputStream of the uploaded image
+     * @param fileDetail  Metadata about the uploaded file
      * @param topText     Text to overlay at the top of the image.
      * @param bottomText  Text to overlay at the bottom of the image.
      * @param uriInfo     Context for building the Location header URI.
-     * @return HTTP 201 with Location header pointing to the new resource and
-     * a JSON body of the created {@link Meme}; or an appropriate error status
-     * if validation or processing fails.
+     * @return created status with new meme || error status code
      */
     @Operation(
             summary = "Create a new meme",
@@ -152,22 +148,17 @@ public class CatMemeResource {
                         .build();
             }
 
-            // Overlay text and upload to S3
             BufferedImage memeImg = imageOverlay.overlayText(src, topText, bottomText);
 
-            // build a safe filename
             String keyName = String.format("memes/pepe-%d.png", System.currentTimeMillis());
 
-            // upload & assemble URL
             s3Service.uploadImage(keyName, memeImg);
             String publicUrl = "https://bug-busters-cat-meme.s3.us-east-2.amazonaws.com/"
                     + keyName;
 
-            // Persist in database
             Meme newMeme = new Meme(publicUrl, topText, bottomText);
             Meme inserted = memeDao.insert(newMeme);
 
-            // Build URI for Location header: /api/cat-memes/{id}
             URI createdUri = uriInfo.getAbsolutePathBuilder()
                     .path(String.valueOf(inserted.getId()))
                     .build();
@@ -176,7 +167,7 @@ public class CatMemeResource {
                     .build();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Internal error occurred during upload.")
                     .build();

@@ -3,7 +3,6 @@ package com.bugbusters.service;
 import com.bugbusters.util.AwsAuthUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
@@ -18,6 +17,9 @@ import java.io.IOException;
 
 /**
  * A utility class to read and write images from/to an S3 bucket using the AWS SDK v2.
+ *
+ * @author Alison Fait
+ * @author Justin Gritton-Bell
  */
 public class S3ImageService {
 
@@ -27,7 +29,7 @@ public class S3ImageService {
     private final String bucketName;
 
     /**
-     * Constructor for S3ImageService.
+     * Constructor for S3ImageService that builds an S3 client.
      *
      * @param bucketName the name of the S3 bucket
      * @param region     the AWS region where the bucket is hosted

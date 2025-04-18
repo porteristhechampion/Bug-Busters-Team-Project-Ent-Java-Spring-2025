@@ -7,7 +7,11 @@ import org.hibernate.annotations.GenericGenerator;
 import java.time.LocalDateTime;
 
 /**
- * The type Meme.
+ * A class to represent a meme in the system.
+ * This class maps to the "memes" table in the database.
+ *
+ * @author Jared Doderer
+ * @author ptaylor
  */
 @Entity
 @Table(name = "memes")
@@ -33,7 +37,8 @@ public class Meme {
     }
 
     /**
-     * Instantiates a new Meme.
+     * Instantiates a new Meme and
+     * initializes the fields.
      *
      * @param url        the url
      * @param textTop    the text top
@@ -47,16 +52,13 @@ public class Meme {
 
     /**
      * Gets id.
-     *
      * @return the id
      */
     public int getId() {
         return id;
     }
-
     /**
      * Sets id.
-     *
      * @param id the id
      */
     public void setId(int id) {
@@ -65,16 +67,13 @@ public class Meme {
 
     /**
      * Gets url.
-     *
      * @return the url
      */
     public String getUrl() {
         return url;
     }
-
     /**
      * Sets url.
-     *
      * @param url the url
      */
     public void setUrl(String url) {
@@ -83,16 +82,13 @@ public class Meme {
 
     /**
      * Gets text top.
-     *
      * @return the text top
      */
     public String getTextTop() {
         return textTop;
     }
-
     /**
      * Sets text top.
-     *
      * @param textTop the text top
      */
     public void setTextTop(String textTop) {
@@ -101,16 +97,13 @@ public class Meme {
 
     /**
      * Gets text bottom.
-     *
      * @return the text bottom
      */
     public String getTextBottom() {
         return textBottom;
     }
-
     /**
      * Sets text bottom.
-     *
      * @param textBottom the text bottom
      */
     public void setTextBottom(String textBottom) {
@@ -119,13 +112,22 @@ public class Meme {
 
     /**
      * Gets created at.
-     *
      * @return the created at
      */
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * Sets created at.
+     * @param createdAt time created
+     */
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    /**
+     * Converts object data into a string.
+     * @return string containing object data
+     */
     @Override
     public String toString() {
         return "Meme{" +

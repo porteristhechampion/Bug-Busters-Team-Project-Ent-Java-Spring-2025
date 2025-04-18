@@ -10,6 +10,13 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.Set;
 
+/**
+ * This class sets the base API path, registers resource classes,
+ * and enables support for multipart requests, JSON serialization,
+ * and OpenAPI documentation generation.
+ *
+ * @author Justin Gritton-Bell
+ */
 @OpenAPIDefinition(
         info = @Info(
                 title = "Cat Meme Generator API",
@@ -23,6 +30,12 @@ import java.util.Set;
 )
 @ApplicationPath("/api")
 public class CatMemeApplication extends Application {
+
+    /**
+     * Registers the classes used by the JAX-RS application, along with
+     * resource classes, and addtional features (multipart support, JSON).
+     * @return set of classes
+     */
     @Override
     public Set<Class<?>> getClasses() {
         return Set.of(
