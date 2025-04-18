@@ -12,9 +12,13 @@ import java.util.Set;
 
 @OpenAPIDefinition(
         info = @Info(
-                title       = "Cat Meme Generator API",
-                version     = "1.0.0",
-                description = "Upload an image, add text overlays, store in S3 & the DB."
+                title = "Cat Meme Generator API",
+                version = "1.0.0",
+                description = "This service allows users to upload an image and add text overlays " +
+                        "to create a meme image. The meme is stored in an AWS S3 bucket as well as " +
+                        "in a MySql database. This service was created by Jared Doderer, Justin " +
+                        "Gritton-Bell, Porter Taylor, and Alison Fait, Enterprise Java students at " +
+                        "Madison Area Technical College."
         )
 )
 @ApplicationPath("/api")
