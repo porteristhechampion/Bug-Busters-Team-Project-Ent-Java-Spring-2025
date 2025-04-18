@@ -25,8 +25,12 @@ public class ImageOverlay {
     private final double fontSizeFactor;
     private final int offset;
     private final int paddingTop;
-    private final int paddingBottom;
 
+    /**
+     * Constructs an ImageOverlay object and initializes properties
+     * such as font name, size factor, outline offset, and padding
+     * from the configuration file {@code overlay.properties}.
+     */
     public ImageOverlay() {
         Properties properties = PropertiesLoader.load("/overlay.properties");
 
@@ -34,7 +38,6 @@ public class ImageOverlay {
         fontSizeFactor = Double.parseDouble(properties.getProperty("font.size.factor"));
         offset = Integer.parseInt(properties.getProperty("outline.offset"));
         paddingTop = Integer.parseInt(properties.getProperty("text.padding.top"));
-        paddingBottom = Integer.parseInt(properties.getProperty("text.padding.bottom"));
     }
 
     /**
@@ -69,7 +72,7 @@ public class ImageOverlay {
         List<String> bottomLines = getWrappedText(bottomText, fm, width);
         int totalBottomHeight = fm.getHeight() * bottomLines.size();
 
-        int bottomStartY = height - totalBottomHeight - paddingBottom;
+        int bottomStartY = height - totalBottomHeight + fm.getAscent();
 
         drawCenteredText(g2d, bottomText, width, bottomStartY, fm);
 
